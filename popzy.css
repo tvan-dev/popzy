@@ -81,7 +81,7 @@ trong khi đó thì VISIBILITY + opacity có thể tạo hiệu ứng transition
     font-style: italic;
 }
 
-.content-body, ul {
+.content-body, .popzy-list {
     display: flex;
     flex-direction: column;
     justify-content: center;
