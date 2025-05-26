@@ -1,0 +1,97 @@
+
+.container-btn {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+.btn {
+    padding: 8px 16px;
+    font-size: 1.6rem;
+    background: transparent;
+    cursor: pointer;
+}
+
+.popzy__backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    background-color: rgba(141, 89, 89, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0; 
+    visibility: hidden;
+    transition: opacity, visibility;
+    transition-duration: 0.3s;
+    
+}
+/* visibility : hidden phần tử ẩn khỏi giao diện nhưng vẫn chiếm không gian layout
+>< display: none cũng tương tự nhưng không chiếm không gian, ẩn ngay lập tức, 
+trong khi đó thì VISIBILITY + opacity có thể tạo hiệu ứng transition fade in/out mượt */
+.popzy__backdrop.popzy--show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.popzy__container {
+    position: relative;
+    width: min(600px, 90%);
+    min-height: 300px;
+    background-color: white;
+    border-radius: 8px;
+    padding: 20px 20px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    transform: scale(0);
+    transition: transform 0.3s ease-in-out;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);   
+}
+.popzy__backdrop.popzy--show .popzy__container {
+    transform: scale(1);
+}
+.popzy__close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    height: 32px;
+    width: 32px;
+    font-size: 20px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 32px;
+}
+.popzy__close:hover {
+    background-color: rgba(7, 235, 64, 0.5);
+}
+.popzy__content {
+    margin: 10px;
+    text-align: center;
+    max-height: 500px;
+    overflow-y: auto;
+}
+
+.no-scroll {
+    overflow: hidden;
+}
+.class1 {
+    background-color:rgb(231, 241, 78);
+}
+.class2 {
+    font-style: italic;
+}
+
+.content-body, ul {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 30px;
+    margin: 10px;
+}
+
+
+.popzy__footer {
+    display: flex;
+    padding: 8px 16px;
+    gap: 20px;
+}
