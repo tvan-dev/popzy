@@ -14,6 +14,7 @@
     media="all"
 />
 <link rel="stylesheet" href="./assets/styles.css" media="all" />
+<link rel="stylesheet" href="./src/popzy.css">
 <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon" />
 </head>
 <body>
@@ -397,11 +398,24 @@ modal.close();</code></pre>
         </p>
     </footer>
 </div>
+<template id="modal-1">
+    <h1>Template modal 1</h1>
+</template>
 <!-- /CONTAINER -->
 
 <script src="./assets/highlight/highlight.js"></script>
+<script src="./src/popzy.js"></script>
 <script>
+    // highlight code
     hljs.initHighlightingOnLoad();
+
+    //modal
+    const popzy1 = new Popzy({
+        // content: '<h1>This is a basic modal</h1>',
+        templateId:"modal-1",
+    });
+
+    
 </script>
 </body>
 </html>
