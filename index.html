@@ -400,6 +400,7 @@ modal.close();</code></pre>
 </div>
 <template id="modal-1">
     <h1>Template modal 1</h1>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum quis necessitatibus, quidem, deserunt placeat iure aliquid accusantium hic aspernatur quia nesciunt nobis sunt facilis tempore qui natus at corporis possimus?</p>
 </template>
 <!-- /CONTAINER -->
 
@@ -410,11 +411,16 @@ modal.close();</code></pre>
     hljs.initHighlightingOnLoad();
 
     //modal
-    const popzy1 = new Popzy({
-        // content: '<h1>This is a basic modal</h1>',
-        templateId:"modal-1",
-    });
+    const modal1Btn = document.querySelector(".js-popzy-modal-1");
 
+    const popzy1 = new Popzy({
+        templateId:"modal-1",
+        // enableSrollLock: false,
+    });
+    
+    modal1Btn.onclick = function() {
+        popzy1.open();
+    }
     
 </script>
 </body>

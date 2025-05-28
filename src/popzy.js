@@ -16,6 +16,8 @@ function Popzy (options = {}) {
             destroyOnClose : true, 
             cssClass : [],
             footer : false,
+            enableSrollLock: true,
+            scrollLockTarget: () => document.body,
         },options);
     
     if(this.opt.templateId) {
@@ -145,14 +147,26 @@ Popzy.prototype.open = function() {
     }
     
     //Disable scroll
-    document.body.classList.add("no-scroll")
-    document.body.style.paddingRight = this.getScrollbarWidth() + "px"
+    if(this.opt.enableSrollLock) {
+        const target = this.opt.scrollLockTarget();
+        if(this._hasScrollbar(target)) {
+            target.classList.add("no-scroll")
+            const targetPadRight = parseInt(getComputedStyle(target).paddingRight);
+            target.style.paddingRight = targetPadRight + this.getScrollbarWidth() + "px"
+        }
+    }
     
     this._onTransitionEnd(this.opt.onOpen)
 
     return this._backdrop
 };
+Popzy.prototype._hasScrollbar = function(target) {
+    if([document.documentElement, document.body].includes(target)) {
+        return document.documentElement.scrollHeight > document.documentElement.clientHeight || document.body.scrollHeight > document.body.clientHeight;
+    }
+    return target.scrollHeight > target.clientHeight;
 
+}
 Popzy.prototype.close = function(destroy = this.opt.destroyOnClose) {
     Popzy.elements.pop()
     if (this.opt.closeMethod.includes("escape")) {
@@ -168,9 +182,16 @@ Popzy.prototype.close = function(destroy = this.opt.destroyOnClose) {
         if(typeof this.opt.onClose === "function") this.opt.onClose() 
     })
     
-    if(Popzy.elements.length === 0) {
-        document.body.classList.remove("no-scroll")
-        document.body.style.paddingRight = "0px"
+    //Enable scroll
+    if(this.opt.enableSrollLock && Popzy.elements.length === 0) {
+        const target = this.opt.scrollLockTarget();
+        const targetPadRight = parseInt(getComputedStyle(target).paddingRight);
+        if(this._hasScrollbar(target)) {
+            target.classList.remove("no-scroll")
+
+            target.style.paddingRight = targetPadRight - this.getScrollbarWidth() + "px"
+        }
+        
     }
     
     
